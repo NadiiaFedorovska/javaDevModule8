@@ -1,0 +1,4 @@
+
+2023-09-17 18:56:34 INFO  OsbbCrud: Crud has initialized
+2023-09-17 18:56:34 DEBUG OsbbCrud: Flyway migration execute
+2023-09-17 18:56:35 TRACE OsbbCrud: Call getting ownership with auto not allowed method
