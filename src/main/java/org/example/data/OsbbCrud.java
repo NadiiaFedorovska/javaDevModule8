@@ -1,7 +1,7 @@
 package org.example.data;
 
 import org.apache.log4j.Logger;
-import org.flywaydb.core.Flyway;
+import org.example.MigrationFW;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -33,19 +33,11 @@ public class OsbbCrud implements Closeable {
             ") AS t5 ON t.residents_RC_id = t5.residents_RC_id\n" +
             "WHERE t3.entry_by_car = '-' AND t5.flat_count < 2;";
 
-    private void migrationFlyway() {
-        logger.debug("Flyway migration execute");
-
-        Flyway.configure()
-                .dataSource(jdbcUrl, userName, password)
-                .locations("classpath:flyway/scripts")
-                .load()
-                .migrate();
-    }
-
     public OsbbCrud initFlyway() throws SQLException {
         logger.info("Crud has initialized");
-        migrationFlyway();
+
+        MigrationFW migration = new MigrationFW();
+        migration.migrationFlyway();
 
         conn = DriverManager.getConnection(jdbcUrl, userName, password);
         return this;
